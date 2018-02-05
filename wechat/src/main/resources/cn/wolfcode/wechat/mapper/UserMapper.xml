@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wolfcode.wechat.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="cn.wolfcode.wechat.domain.User">
+        <id column="id" property="id"/>
+        <result column="phone" property="phone"/>
+        <result column="sn" property="sn"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from `user`
+    where id = #{id}
+  </delete>
+    <insert id="insert" parameterType="cn.wolfcode.wechat.domain.User" useGeneratedKeys="true" keyProperty="id">
+    insert into `user` (phone,sn)
+    values (#{phone},#{sn})
+  </insert>
+    <insert id="bindPhone">
+         insert into `user` (phone,sn)
+    values (#{phone},#{sn})
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="cn.wolfcode.wechat.domain.User">
+    update `user`
+    set phone = #{phone},
+    sn = #{sn}
+    where id = #{id}
+  </update>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    select id, phone,sn
+    from `user`
+    where id = #{id}
+  </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+    select id, phone,sn
+    from `user`
+  </select>
+    <select id="selectBidPhone" resultType="cn.wolfcode.wechat.domain.User">
+    select id, phone,sn
+    from `user`
+    where sn = #{sn}
+  </select>
+    <select id="selectBySn" resultType="cn.wolfcode.wechat.domain.User">
+         select id, phone,sn
+    from `user`
+    where sn = #{sn}
+    </select>
+</mapper>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wolfcode.wechat.mapper.MenuMapper" >
+
+<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+insert into menu values(null,#{name},#{url},#{view},#{order},#{parentId})
+</insert>
+
+<select id="selectByParentId" resultType="cn.wolfcode.wechat.domain.Menu">
+select * from menu where parentId = #{parentId} and view = 1 order by 'order' desc
+</select>
+</mapper>

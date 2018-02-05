@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wolfcode.wechat.mapper.ClientMapper" >
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert into client(id,nickname,openId,concernTime,cancelConcernTime,status) values(null,#{nickname},#{openId},#{concernTime},#{cancelConcernTime},#{status})
+    </insert>
+
+    <update id="updateByPrimaryKey" parameterType="cn.wolfcode.wechat.domain.Client">
+        update client set cancelConcernTime = #{cancelConcernTime} where id=#{id}
+    </update>
+    <select id="queryCount" resultType="java.lang.Integer">
+        select count(*) from client
+    </select>
+    <select id="queryList" resultType="cn.wolfcode.wechat.domain.Client">
+        select * from client
+    </select>
+</mapper>

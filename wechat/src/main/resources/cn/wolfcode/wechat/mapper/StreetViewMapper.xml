@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wolfcode.wechat.mapper.StreetViewMapper" >
+  <resultMap id="BaseResultMap" type="cn.wolfcode.wechat.domain.StreetView" >
+    <id column="id" property="id" />
+    <result column="shopName" property="shopName" />
+    <result column="placeName" property="placeName" />
+    <result column="areaName" property="areaName" />
+    <result column="url" property="url" />
+    <result column="latitude" property="latitude" />
+    <result column="longtitude" property="longtitude" />
+    <result column="state" property="state" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from `streetview`
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="cn.wolfcode.wechat.domain.StreetView" useGeneratedKeys="true" keyProperty="id" >
+    insert into `streetview` (shopName, placeName, areaName, url, latitude, longtitude, 
+      state)
+    values (#{shopName}, #{placeName}, #{areaName}, #{url}, #{latitude}, #{longtitude}, 
+      #{state})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.wolfcode.wechat.domain.StreetView" >
+    update `streetview`
+    set shopName = #{shopName},
+      placeName = #{placeName},
+      areaName = #{areaName},
+      url = #{url},
+      latitude = #{latitude},
+      longtitude = #{longtitude},
+      state = #{state}
+    where id = #{id}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select id, shopName, placeName, areaName, url, latitude, longtitude, state
+    from `streetview`
+    where id = #{id}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, shopName, placeName, areaName, url, latitude, longtitude, state
+    from `streetview`
+  </select>
+  <select id="queryForCount" resultType="java.lang.Integer">
+    select COUNT(id)
+    from `streetview`
+  </select>
+  <select id="queryForList" resultMap="BaseResultMap">
+    select id, shopName, placeName, areaName, url, latitude, longtitude, state
+    from `streetview` where state = 1
+    <include refid="base_where"/>
+    limit #{start},#{pageSize}
+  </select>
+  <sql id="base_where">
+
+      <if test="aName!=null and aName != ''">
+        and  areaName = #{aName}
+      </if>
+
+  </sql>
+</mapper>

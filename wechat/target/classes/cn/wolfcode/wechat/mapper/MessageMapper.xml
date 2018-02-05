@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.wolfcode.wechat.mapper.MessageMapper">
+  <resultMap id="BaseResultMap" type="cn.wolfcode.wechat.domain.Message">
+    <id column="id" property="id" />
+    <result column="clientId" property="clientId" />
+    <result column="receiveContent" property="receiveContent" />
+    <result column="replyContent" property="replyContent" />
+    <result column="type" property="type" />
+    <result column="inputTime" property="inputTime" />
+  </resultMap>
+  <insert id="insert" keyProperty="id" parameterType="cn.wolfcode.wechat.domain.Message" useGeneratedKeys="true">
+    insert into `message` (clientId, receiveContent, replyContent, type, inputTime)
+    values (#{clientId}, #{receiveContent}, #{replyContent}, #{type}, #{inputTime})
+  </insert>
+</mapper>

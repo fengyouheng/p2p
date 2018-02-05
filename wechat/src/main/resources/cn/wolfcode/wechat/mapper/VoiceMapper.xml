@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wolfcode.wechat.mapper.VoiceMapper">
+    <resultMap id="BaseResultMap" type="cn.wolfcode.wechat.domain.Voice">
+        <id column="id" property="id"/>
+        <result column="personName" property="personName"/>
+        <result column="localId" property="localId"/>
+        <result column="userName" property="userName"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from `voice`
+    where id = #{id}
+  </delete>
+    <insert id="insert" parameterType="cn.wolfcode.wechat.domain.Voice" useGeneratedKeys="true" keyProperty="id">
+    insert into `voice` (personName, localId, userName)
+    values (#{personName}, #{localId}, #{userName})
+  </insert>
+    <update id="updateByPrimaryKey" parameterType="cn.wolfcode.wechat.domain.Voice">
+    update `voice`
+    set personName = #{personName},
+      localId = #{localId},
+      userName = #{userName}
+    where id = #{id}
+  </update>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    select id, personName, localId, userName
+    from `voice`
+    where id = #{id}
+  </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+    select id, personName, localId, userName
+    from `voice`
+  </select>
+    <select id="selectByUserName" resultType="cn.wolfcode.wechat.domain.Voice">
+      select DISTINCT personName
+    from `voice`
+    where userName = #{userName}
+  </select>
+</mapper>

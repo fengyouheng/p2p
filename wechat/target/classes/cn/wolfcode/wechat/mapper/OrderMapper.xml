@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wolfcode.wechat.mapper.OrderMapper">
+    <resultMap id="BaseResultMap" type="cn.wolfcode.wechat.domain.Order">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="orderUserId" property="orderUserId"/>
+        <result column="state" property="state"/>
+        <result column="departure" property="departure"/>
+        <result column="destination" property="destination"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from `order`
+    where id = #{id}
+  </delete>
+    <insert id="insert" parameterType="cn.wolfcode.wechat.domain.Order" useGeneratedKeys="true" keyProperty="id">
+    insert into `order` (username, orderUserId, state, departure, destination,beginDate,endDate)
+    values (#{username}, #{orderUserId}, #{state}, #{departure}, #{destination}, #{beginDate}, #{endDate})
+  </insert>
+    <update id="updateByPrimaryKey" parameterType="cn.wolfcode.wechat.domain.Order">
+    update `order`
+    set username = #{username},
+      orderUserId = #{orderUserId},
+      state = #{state},
+      endDate=#{endDate},
+      departure = #{departure},
+      destination = #{destination}
+    where id = #{id}
+  </update>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    select id, username, orderUserId, state, departure, destination,beginDate,endDate
+    from `order`
+    where id = #{id}
+  </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+    select id, username, orderUserId, state, departure, destination,beginDate,endDate
+    from `order` ORDER BY id DESC
+  </select>
+    <select id="selectBySn" resultType="cn.wolfcode.wechat.domain.Order">
+    select id, username, orderUserId, state, departure, destination,beginDate,endDate
+    from `order`
+    where username = #{sn} and state = 0
+    </select>
+    <select id="select" resultType="cn.wolfcode.wechat.domain.Order">
+         select id, username, orderUserId, state, departure, destination,beginDate,endDate
+    from `order` where state = 0
+    </select>
+</mapper>
